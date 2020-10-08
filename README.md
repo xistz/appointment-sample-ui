@@ -1,5 +1,7 @@
 # Appointment UI
 
+![Appointment Sample UI workflow](https://github.com/xistz/appointment-sample-ui/workflows/Appointment%20Sample%20UI%20workflow/badge.svg)
+
 This repository contains code for the UI of the appointment sample service.
 
 It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and relies on [Auth0](https://auth0.com/) for authorization and user management.
