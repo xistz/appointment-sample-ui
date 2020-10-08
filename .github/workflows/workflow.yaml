@@ -1,4 +1,4 @@
-name: Appointment UI workflow
+name: Appointment Sample UI workflow
 
 on:
   push:
