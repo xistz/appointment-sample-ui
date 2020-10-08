@@ -51,7 +51,7 @@ const useRole = (initialValue) => {
 
 export default function Register() {
   const classes = useStyles();
-  const { role, onChange } = useRole('financial-planner');
+  const { role, onChange } = useRole('financial planner');
   const history = useHistory();
   const registerURL = `${process.env.REACT_APP_API_URL}/register`;
 
@@ -101,7 +101,7 @@ export default function Register() {
               onChange={onChange}
             >
               <FormControlLabel
-                value="financial-planner"
+                value="financial planner"
                 control={<Radio />}
                 label="I would like to offer financial planning advice."
               />
