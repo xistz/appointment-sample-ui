@@ -6,7 +6,10 @@ import RegistrationForm from './RegistrationForm';
 
 export default function Register() {
   const { user } = useAuth0();
-  const isNewUser = user['https://appointment-sample.io/roles'].length === 0;
 
-  return isNewUser ? <RegistrationForm /> : <Redirect to="/" />;
+  if (user[`${process.env.REACT_APP_AUTH0_NAMESPACE}/roles`].length > 0) {
+    return <Redirect to="/" />;
+  }
+
+  return <RegistrationForm />;
 }
