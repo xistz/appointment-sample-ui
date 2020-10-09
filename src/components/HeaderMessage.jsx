@@ -13,17 +13,9 @@ export default function HeaderMessage() {
   const classes = useStyles();
   const { user, isAuthenticated } = useAuth0();
 
-  const message = () => {
-    if (isAuthenticated) {
-      return `Hi, ${user.given_name}!`;
-    }
-
-    return 'Welcome';
-  };
-
   return (
     <Typography variant="h6" className={classes.title}>
-      {message()}
+      {isAuthenticated ? `Hi, ${user.given_name}!` : 'Welcome'}
     </Typography>
   );
 }
