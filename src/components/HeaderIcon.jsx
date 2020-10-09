@@ -21,7 +21,6 @@ export default function HeaderIcon() {
       color="inherit"
       aria-label="menu"
       onClick={() => history.push('/')}
-      s
     >
       <EventIcon />
     </IconButton>
