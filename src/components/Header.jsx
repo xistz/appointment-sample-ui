@@ -4,7 +4,7 @@ import { AppBar, Toolbar } from '@material-ui/core';
 
 import HeaderIcon from './HeaderIcon';
 import HeaderMessage from './HeaderMessage';
-import LogoutButton from './LogoutButton';
+import HeaderAvatar from './HeaderAvatar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,7 @@ export default function Header() {
         <Toolbar>
           <HeaderIcon />
           <HeaderMessage />
-          <LogoutButton />
+          <HeaderAvatar />
         </Toolbar>
       </AppBar>
     </div>
