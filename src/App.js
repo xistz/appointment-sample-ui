@@ -1,24 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import {
   Home,
   Header,
   Profile,
   Register,
-  Loading,
   PrivateRoute,
   NotFound,
 } from './components';
 
 export default function App() {
-  const { isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
     <React.Fragment>
       <Header />
