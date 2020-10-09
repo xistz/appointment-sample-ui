@@ -71,7 +71,7 @@ export default function Register() {
     try {
       await axios.post(registerURL, data, { headers });
 
-      history.push('/');
+      history.go(0);
     } catch (error) {
       const { message } = error.response.data;
 
