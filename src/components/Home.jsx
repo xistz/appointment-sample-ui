@@ -13,7 +13,7 @@ export default function Home() {
   }
 
   if (
-    user[`${process.env.REACT_APP_AUTH0_NAMESPACE}/roles`].includes('Client')
+    user[`${process.env.REACT_APP_AUTH0_NAMESPACE}/roles`].includes('client')
   ) {
     return <HomeClient />;
   }
