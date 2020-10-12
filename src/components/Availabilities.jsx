@@ -153,7 +153,8 @@ export default function Availabilities({ date }) {
   const [availabilities, setAvailabilities] = useState({});
 
   useEffect(() => {
-    const getAvailabilities = async (date) => {
+    // get availabilities for current date
+    (async (date) => {
       const token = await getAccessTokenSilently();
 
       const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities`;
@@ -172,8 +173,10 @@ export default function Availabilities({ date }) {
       const { data } = response.data;
 
       const got = data.reduce((result, current) => {
-        const { id } = current;
-        const { from } = current.attributes;
+        const {
+          id,
+          attributes: { from },
+        } = current;
 
         const datetime = formatISO(new Date(from));
 
@@ -183,9 +186,7 @@ export default function Availabilities({ date }) {
       }, {});
 
       setAvailabilities(got);
-    };
-
-    getAvailabilities(date);
+    })(date);
   }, [date, getAccessTokenSilently]);
 
   const handleChange = (event) => {
