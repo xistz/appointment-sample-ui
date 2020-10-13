@@ -8,7 +8,7 @@ export default function HomeClient() {
 
   return (
     <Layout date={date} changeDate={changeDate} title="Make an appointment">
-      <AppointmentPicker />
+      <AppointmentPicker date={date} />
     </Layout>
   );
 }
