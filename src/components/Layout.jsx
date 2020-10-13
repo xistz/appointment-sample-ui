@@ -40,7 +40,7 @@ export default function Layout({ children, date, changeDate, title }) {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item sm wrap="nowrap">
+          <Grid item sm>
             {children}
           </Grid>
         </Grid>
