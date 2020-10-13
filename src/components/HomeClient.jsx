@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Layout from './Layout';
+import AppointmentPicker from './AppointmentPicker';
 
 export default function HomeClient() {
-  return <h2>Home Client</h2>;
+  const [date, changeDate] = useState(new Date());
+
+  return (
+    <Layout date={date} changeDate={changeDate} title="Make an appointment">
+      <AppointmentPicker />
+    </Layout>
+  );
 }

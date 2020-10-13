@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { set } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import { formatISO } from 'date-fns';
@@ -9,10 +9,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Availabilty from './Availability';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  paper: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -245,9 +248,5 @@ export default function Availabilities({ date }) {
       );
     });
 
-  return (
-    <Grid item>
-      <div className={classes.root}>{renderAvailabilities()}</div>
-    </Grid>
-  );
+  return <Paper className={classes.paper}>{renderAvailabilities()}</Paper>;
 }

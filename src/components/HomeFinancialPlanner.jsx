@@ -7,7 +7,7 @@ export default function HomeFinancialPlanner() {
   const [date, changeDate] = useState(new Date());
 
   return (
-    <Layout date={date} changeDate={changeDate} title="When are you available?">
+    <Layout date={date} changeDate={changeDate} title="Set Availability">
       <Availabilities date={date} />
     </Layout>
   );

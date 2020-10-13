@@ -24,7 +24,7 @@ export default function Layout({ children, date, changeDate, title }) {
     <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5" align="center" gutterBottom>
+        <Typography component="h1" variant="h4" align="center">
           {title}
         </Typography>
         <Grid container spacing={2} justify="center" alignItems="center">
@@ -40,7 +40,7 @@ export default function Layout({ children, date, changeDate, title }) {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid container item sm wrap="nowrap">
+          <Grid item sm wrap="nowrap">
             {children}
           </Grid>
         </Grid>
