@@ -24,7 +24,7 @@ export default function Layout({ children, date, changeDate, title }) {
     <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4" align="center">
+        <Typography component="h1" variant="h4" align="center" gutterBottom>
           {title}
         </Typography>
         <Grid container spacing={2} justify="center" alignItems="center">
