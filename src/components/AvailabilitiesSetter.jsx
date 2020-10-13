@@ -6,7 +6,7 @@ import { formatISO } from 'date-fns';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import Availabilty from './Availability';
+import AvailabiltySetter from './AvailabilitySetter';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -150,7 +150,7 @@ const getTo = (date) =>
     })
   );
 
-export default function Availabilities({ date }) {
+export default function AvailabilitiesSetter({ date }) {
   const classes = useStyles();
   const { getAccessTokenSilently } = useAuth0();
   const [availabilities, setAvailabilities] = useState({});
@@ -239,7 +239,7 @@ export default function Availabilities({ date }) {
       const datetime = formatISO(availability);
 
       return (
-        <Availabilty
+        <AvailabiltySetter
           datetime={availability}
           key={availability}
           id={availabilities[datetime]}
