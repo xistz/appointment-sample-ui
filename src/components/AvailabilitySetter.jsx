@@ -22,7 +22,7 @@ export default function AvailabilitySetter({ datetime, id, handleChange }) {
 
   return (
     <Card className={classes.root}>
-      <CardContent className={classes.content}>
+      <CardContent>
         <Typography component="h5" variant="h5">
           {format(datetime, 'HH:mm')}
         </Typography>
