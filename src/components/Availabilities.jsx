@@ -189,26 +189,45 @@ export default function Availabilities({ date }) {
     })(date);
   }, [date, getAccessTokenSilently]);
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     const { checked, name } = event.target;
 
-    if (checked) {
-      const updated = {};
-      updated[name] = 'dummy_id';
+    const updated = {};
+    try {
+      const token = await getAccessTokenSilently();
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
 
-      setAvailabilities({
-        ...availabilities,
-        ...updated,
-      });
-    } else {
-      const updated = {};
-      updated[name] = undefined;
+      if (checked) {
+        const createAvailabilityURL = `${process.env.REACT_APP_API_URL}/availabilities`;
+        const data = {
+          from: name,
+        };
 
-      setAvailabilities({
-        ...availabilities,
-        ...updated,
-      });
+        const response = await axios.post(createAvailabilityURL, data, {
+          headers,
+        });
+
+        const { id } = response.data;
+
+        updated[name] = id;
+      } else {
+        const id = availabilities[name];
+        const deleteAvailabilityURL = `${process.env.REACT_APP_API_URL}/availabilities/${id}`;
+
+        await axios.delete(deleteAvailabilityURL, { headers });
+
+        updated[name] = undefined;
+      }
+    } catch (error) {
+      console.log(error.response.data);
     }
+
+    setAvailabilities({
+      ...availabilities,
+      ...updated,
+    });
   };
 
   const times = getTimes(date);
