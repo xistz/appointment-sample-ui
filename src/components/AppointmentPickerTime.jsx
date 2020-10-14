@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { formatISO } from 'date-fns';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 import AppointmentPickerTimeCard from './AppointmentPickerTimeCard';
-import { getTimes } from '../helpers';
-
-const got = {
-  '2020-10-13T01:00:00.000Z': true,
-  '2020-10-13T03:00:00.000Z': true,
-};
+import { getFrom, getTo } from '../helpers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,40 +20,68 @@ const useStyles = makeStyles((theme) => ({
 export default function AvailabilitiesPickerTime({ date, selectTime }) {
   const classes = useStyles();
   const { getAccessTokenSilently } = useAuth0();
-  const [availabilities, setAvailabilities] = useState({});
+  const [times, setTimes] = useState([]);
 
   useEffect(() => {
     // get availabilities for current date
     (async (date) => {
-      const initial = {};
+      const token = await getAccessTokenSilently();
 
-      for (const from in got) {
-        const datetime = formatISO(new Date(from));
+      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities/search`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const params = {
+        from: getFrom(date),
+        to: getTo(date),
+      };
 
-        initial[datetime] = got[from];
-      }
+      const response = await axios.get(getAvailabilitiesURL, {
+        params,
+        headers,
+      });
+      const { data } = response.data;
+      console.log(data);
 
-      setAvailabilities(initial);
+      const initial = data.map((time) => {
+        const {
+          attributes: { from },
+        } = time;
+
+        return from;
+      });
+
+      setTimes(initial);
     })(date);
-  }, [date]);
+  }, [date, getAccessTokenSilently]);
 
-  const times = getTimes(date);
   const renderAvailabilities = () =>
-    times.reduce((result, availability) => {
-      const datetime = formatISO(availability);
+    times.map((time) => {
+      const availability = new Date(time);
 
-      if (availabilities[datetime]) {
-        result.push(
-          <AppointmentPickerTimeCard
-            datetime={availability}
-            key={availability}
-            selectTime={selectTime}
-          />
-        );
-      }
+      return (
+        <AppointmentPickerTimeCard
+          datetime={availability}
+          key={availability}
+          selectTime={selectTime}
+        />
+      );
+    });
+  // times.reduce((result, availability) => {
+  //   const datetime = formatISO(availability);
 
-      return result;
-    }, []);
+  //   if (availabilities[datetime]) {
+  //     result.push(
+  //       <AppointmentPickerTimeCard
+  //         datetime={availability}
+  //         key={availability}
+  //         selectTime={selectTime}
+  //       />
+  //     );
+  //   }
+
+  //   return result;
+  // }, []);
 
   return <div className={classes.root}>{renderAvailabilities()}</div>;
 }
