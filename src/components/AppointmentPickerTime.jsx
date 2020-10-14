@@ -41,7 +41,6 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
         headers,
       });
       const { data } = response.data;
-      console.log(data);
 
       const initial = data.map((time) => {
         const {
