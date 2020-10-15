@@ -39,7 +39,6 @@ export default function AvailabilitiesPickerFP({ time, selectAvailability }) {
         headers,
       });
       const { data } = response.data;
-      console.log(data);
 
       const initial = data.map((availability) => {
         const {
