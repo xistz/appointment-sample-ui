@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 import AppointmentPickerTime from './AppointmentPickerTime';
 import AppointmentPickerFP from './AppointmentPickerFP';
@@ -21,14 +23,13 @@ const steps = ['Time', 'Financial Planner'];
 
 export default function AppointmentPicker({ date }) {
   const classes = useStyles();
+  const { getAccessTokenSilently } = useAuth0();
   const [activeStep, setActiveStep] = React.useState(0);
   const [time, setTime] = React.useState('');
-  const [fp, setFP] = React.useState('');
 
   useEffect(() => {
     setActiveStep(0);
     setTime('');
-    setFP('');
   }, [date]);
 
   const selectTime = (event) => {
@@ -38,10 +39,26 @@ export default function AppointmentPicker({ date }) {
     setActiveStep(1);
   };
 
-  const selectFP = (event) => {
+  const selectAvailability = async (event) => {
     const { id } = event.currentTarget;
-    setFP(id);
-    setActiveStep(2);
+
+    try {
+      const token = await getAccessTokenSilently();
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const createAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments`;
+      const data = {
+        availability_id: id,
+      };
+
+      await axios.post(createAppointmentURL, data, {
+        headers,
+      });
+      setActiveStep(2);
+    } catch (error) {
+      console.error(error.response.data);
+    }
   };
 
   const getStepContent = (step) => {
@@ -49,7 +66,12 @@ export default function AppointmentPicker({ date }) {
       case 0:
         return <AppointmentPickerTime date={date} selectTime={selectTime} />;
       case 1:
-        return <AppointmentPickerFP time={time} selectFP={selectFP} />;
+        return (
+          <AppointmentPickerFP
+            time={time}
+            selectAvailability={selectAvailability}
+          />
+        );
       case 2:
         return <AppointmentPickerSuccess />;
       default:
@@ -59,7 +81,7 @@ export default function AppointmentPicker({ date }) {
 
   return (
     <Paper className={classes.paper}>
-      <Typography component="h1" variant="h4" align="center">
+      <Typography component="h2" variant="h5" align="center">
         Pick a...
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
