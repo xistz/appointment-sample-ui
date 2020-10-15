@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import AppointmentPickerTimeCard from './AppointmentPickerTimeCard';
 import { getFrom, getTo } from '../helpers';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +55,16 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
     })(date);
   }, [date, getAccessTokenSilently]);
 
-  const renderAvailabilities = () =>
-    times.map((time) => {
+  const renderAvailabilities = () => {
+    if (times.length === 0) {
+      return (
+        <Typography component="h3" variant="h6" align="center">
+          Sorry! Our financial planners are not available today.
+        </Typography>
+      );
+    }
+
+    return times.map((time) => {
       const availability = new Date(time);
 
       return (
@@ -66,21 +75,7 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
         />
       );
     });
-  // times.reduce((result, availability) => {
-  //   const datetime = formatISO(availability);
-
-  //   if (availabilities[datetime]) {
-  //     result.push(
-  //       <AppointmentPickerTimeCard
-  //         datetime={availability}
-  //         key={availability}
-  //         selectTime={selectTime}
-  //       />
-  //     );
-  //   }
-
-  //   return result;
-  // }, []);
+  };
 
   return <div className={classes.root}>{renderAvailabilities()}</div>;
 }
