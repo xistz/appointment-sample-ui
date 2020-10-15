@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 import AppointmentPickerFPCard from './AppointmentPickerFPCard';
-
-const got = [
-  { user_id: 'test_1', name: 'test_1_name' },
-  { user_id: 'test_2', name: 'test_2_name' },
-  { user_id: 'test_3', name: 'test_3_name' },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,23 +16,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AvailabilitiesPickerFP({ time, selectFP }) {
+export default function AvailabilitiesPickerFP({ time, selectAvailability }) {
   const classes = useStyles();
   const { getAccessTokenSilently } = useAuth0();
-  const [fps, setFPs] = useState([]);
+  const [availabilities, setAvailabilities] = useState([]);
 
   useEffect(() => {
-    // get availabilities for current date
+    // get availabilities for current time
     (async (time) => {
-      const initial = got;
+      const token = await getAccessTokenSilently();
 
-      setFPs(initial);
+      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities/search`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const params = {
+        at: time,
+      };
+
+      const response = await axios.get(getAvailabilitiesURL, {
+        params,
+        headers,
+      });
+      const { data } = response.data;
+      console.log(data);
+
+      const initial = data.map((availability) => {
+        const {
+          id,
+          attributes: { fp_name, fp_picture },
+        } = availability;
+
+        return { id, fp_name, fp_picture };
+      });
+
+      setAvailabilities(initial);
     })(time);
   }, [time, getAccessTokenSilently]);
 
   const renderFPs = () =>
-    fps.map((fp) => (
-      <AppointmentPickerFPCard fp={fp} selectFP={selectFP} key={fp.user_id} />
+    availabilities.map((availability) => (
+      <AppointmentPickerFPCard
+        availability={availability}
+        selectAvailability={selectAvailability}
+        key={availability.id}
+      />
     ));
 
   return <div className={classes.root}>{renderFPs()}</div>;

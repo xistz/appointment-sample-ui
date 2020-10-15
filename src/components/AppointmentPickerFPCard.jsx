@@ -12,16 +12,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FPPicker({ fp, selectFP }) {
+export default function FPPicker({ availability, selectAvailability }) {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <Card className={classes.card}>
         <CardActions>
-          <Button onClick={selectFP} id={fp.user_id} fullWidth>
-            <Avatar alt={fp.name} src={fp.picture} className={classes.avatar} />
-            {fp.name}
+          <Button onClick={selectAvailability} id={availability.id} fullWidth>
+            <Avatar
+              alt={availability.fp_name}
+              src={availability.fp_picture}
+              className={classes.avatar}
+            />
+            {availability.fp_name}
           </Button>
         </CardActions>
       </Card>
