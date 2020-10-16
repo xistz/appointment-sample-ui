@@ -19,7 +19,6 @@ export default function HeaderIcon({ location, icon, tooltip }) {
         edge="start"
         className={classes.eventIcon}
         color="inherit"
-        aria-label="menu"
         onClick={() => history.push(location)}
       >
         {icon}
