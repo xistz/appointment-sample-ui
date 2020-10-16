@@ -12,11 +12,11 @@ export default function Home() {
     return <Redirect to="/register" />;
   }
 
-  if (
-    user[`${process.env.REACT_APP_AUTH0_NAMESPACE}/roles`].includes('client')
-  ) {
-    return <HomeClient />;
-  }
-
-  return <HomeFinancialPlanner />;
+  return user[`${process.env.REACT_APP_AUTH0_NAMESPACE}/roles`].includes(
+    'client'
+  ) ? (
+    <HomeClient />
+  ) : (
+    <HomeFinancialPlanner />
+  );
 }
