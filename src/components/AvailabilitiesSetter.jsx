@@ -5,7 +5,7 @@ import { formatISO } from 'date-fns';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import AvailabiltySetter from './AvailabilitySetter';
+import AvailabiltySetterCard from './AvailabilitySetterCard';
 import { getFrom, getTo, getTimes } from '../helpers';
 
 const useStyles = makeStyles((theme) => ({
@@ -108,7 +108,7 @@ export default function AvailabilitiesSetter({ date }) {
       const datetime = formatISO(availability);
 
       return (
-        <AvailabiltySetter
+        <AvailabiltySetterCard
           datetime={availability}
           key={availability}
           id={availabilities[datetime]}

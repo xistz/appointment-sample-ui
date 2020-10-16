@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AvailabilitySetter({ datetime, id, handleChange }) {
+export default function AvailabilitySetterCard({ datetime, id, handleChange }) {
   const classes = useStyles();
 
   return (
