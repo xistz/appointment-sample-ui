@@ -7,7 +7,7 @@ export default function HomeClient() {
   const [date, changeDate] = useState(new Date());
 
   return (
-    <Layout date={date} changeDate={changeDate} title="Make an appointment">
+    <Layout date={date} changeDate={changeDate} title="Make an Appointment">
       <AppointmentPicker date={date} />
     </Layout>
   );
