@@ -6,6 +6,7 @@ import Register from './Register';
 import PrivateRoute from './PrivateRoute';
 import Loading from './Loading';
 import NotFound from './NotFound';
+import AppointmentsCommon from './AppointmentsCommon';
 
 export {
   Auth0ProviderWithHistory,
@@ -16,4 +17,5 @@ export {
   PrivateRoute,
   Loading,
   NotFound,
+  AppointmentsCommon,
 };
