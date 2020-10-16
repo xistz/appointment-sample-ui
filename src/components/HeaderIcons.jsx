@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Event as EventIcon,
-  Schedule as ScheduleIcon,
-} from '@material-ui/icons';
+import { Add as AddIcon, Event as EventIcon } from '@material-ui/icons';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import HeaderIcon from './HeaderIcon';
@@ -20,10 +17,10 @@ export default function Header() {
 
   return (
     <React.Fragment>
-      <HeaderIcon location={'/'} icon={<EventIcon />} tooltip={tooltip} />
+      <HeaderIcon location={'/'} icon={<AddIcon />} tooltip={tooltip} />
       <HeaderIcon
         location={'/appointments'}
-        icon={<ScheduleIcon />}
+        icon={<EventIcon />}
         tooltip={'View Appointments'}
       />
     </React.Fragment>
