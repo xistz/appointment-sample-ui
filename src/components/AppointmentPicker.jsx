@@ -32,16 +32,12 @@ export default function AppointmentPicker({ date }) {
     setTime('');
   }, [date]);
 
-  const selectTime = (event) => {
-    const { name } = event.currentTarget;
-
-    setTime(name);
+  const selectTime = (selectedTime) => {
+    setTime(selectedTime);
     setActiveStep(1);
   };
 
-  const selectAvailability = async (event) => {
-    const { id } = event.currentTarget;
-
+  const selectAvailability = async (availability_id) => {
     try {
       const token = await getAccessTokenSilently();
       const headers = {
@@ -49,7 +45,7 @@ export default function AppointmentPicker({ date }) {
       };
       const createAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments`;
       const data = {
-        availability_id: id,
+        availability_id,
       };
 
       await axios.post(createAppointmentURL, data, {

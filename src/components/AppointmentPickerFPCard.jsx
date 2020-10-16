@@ -19,7 +19,7 @@ export default function FPPicker({ availability, selectAvailability }) {
     <React.Fragment>
       <Card className={classes.card}>
         <CardActions>
-          <Button onClick={selectAvailability} id={availability.id} fullWidth>
+          <Button onClick={() => selectAvailability(availability.id)} fullWidth>
             <Avatar
               alt={availability.fp_name}
               src={availability.fp_picture}

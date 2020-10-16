@@ -28,7 +28,7 @@ export default function AvailabilityPicker({ datetime, selectTime }) {
     <React.Fragment>
       <Card className={classes.card}>
         <CardActions>
-          <Button onClick={selectTime} name={formatISO(datetime)} fullWidth>
+          <Button onClick={() => selectTime(formatISO(datetime))} fullWidth>
             {format(datetime, 'HH:mm')}
           </Button>
         </CardActions>
