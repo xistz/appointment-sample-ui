@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Redirect } from 'react-router-dom';
 
 import Layout from './Layout';
+import AppointmentsViewer from './AppointmentsViewer';
 
 export default function AppointmentsCommon() {
   const [date, changeDate] = useState(new Date());
@@ -14,7 +15,7 @@ export default function AppointmentsCommon() {
 
   return (
     <Layout date={date} changeDate={changeDate} title="Appointments">
-      <div>appointments page</div>
+      <AppointmentsViewer date={date} />
     </Layout>
   );
 }
