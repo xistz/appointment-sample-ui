@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -24,8 +24,8 @@ const steps = ['Time', 'Financial Planner'];
 export default function AppointmentPicker({ date }) {
   const classes = useStyles();
   const { getAccessTokenSilently } = useAuth0();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [time, setTime] = React.useState('');
+  const [activeStep, setActiveStep] = useState(0);
+  const [time, setTime] = useState('');
 
   useEffect(() => {
     setActiveStep(0);
