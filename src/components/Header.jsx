@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar } from '@material-ui/core';
 
-import HeaderIcon from './HeaderIcon';
 import HeaderMessage from './HeaderMessage';
 import HeaderAvatar from './HeaderAvatar';
+import HeaderIcons from './HeaderIcons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,7 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <HeaderIcon />
+          <HeaderIcons />
           <HeaderMessage />
           <HeaderAvatar />
         </Toolbar>
