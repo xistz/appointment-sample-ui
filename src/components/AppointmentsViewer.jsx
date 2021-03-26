@@ -28,7 +28,7 @@ export default function AppointmentsViewer({ date }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAppointmentsURL = `${process.env.REACT_APP_API_URL}/appointments`;
+      const getAppointmentsURL = `${window.location.origin}/appointments`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -83,7 +83,7 @@ export default function AppointmentsViewer({ date }) {
         Authorization: `Bearer ${token}`,
       };
 
-      const deleteAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments/${id}`;
+      const deleteAppointmentURL = `${window.location.origin}/appointments/${id}`;
 
       await axios.delete(deleteAppointmentURL, { headers });
 

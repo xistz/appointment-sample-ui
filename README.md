@@ -58,10 +58,6 @@ Auth0 audience refers to the identifier of the API application (dummy URL, not t
 
 Auth0 namespace refers to the namespace (URL) used to define user roles for the appointment sample service.
 
-### `REACT_APP_API_URL`
-
-API URL refers to the base URL for the appointment sample API.
-
 ## CI/CD
 
 This repository is deployed using GitHub Actions to Firebase hosting.

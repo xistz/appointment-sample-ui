@@ -43,7 +43,7 @@ export default function AppointmentPicker({ date }) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const createAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments`;
+      const createAppointmentURL = `${window.location.origin}/appointments`;
       const data = {
         availability_id,
       };

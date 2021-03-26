@@ -28,7 +28,7 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities/search`;
+      const getAvailabilitiesURL = `${window.location.origin}/availabilities/search`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };
