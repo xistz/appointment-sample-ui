@@ -26,7 +26,7 @@ export default function AvailabilitiesPickerFP({ time, selectAvailability }) {
     (async (time) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${window.location.origin}/availabilities/search`;
+      const getAvailabilitiesURL = `${window.location.origin}/api/availabilities/search`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };

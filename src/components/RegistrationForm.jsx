@@ -53,7 +53,7 @@ export default function Register() {
   const classes = useStyles();
   const { role, onChange } = useRole('financial planner');
   const history = useHistory();
-  const registerURL = `${window.location.origin}/register`;
+  const registerURL = `${window.location.origin}/api/register`;
 
   const { getAccessTokenSilently } = useAuth0();
 

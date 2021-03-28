@@ -29,7 +29,7 @@ export default function AvailabilitiesSetter({ date }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${window.location.origin}/availabilities`;
+      const getAvailabilitiesURL = `${window.location.origin}/api/availabilities`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -72,7 +72,7 @@ export default function AvailabilitiesSetter({ date }) {
       };
 
       if (checked) {
-        const createAvailabilityURL = `${window.location.origin}/availabilities`;
+        const createAvailabilityURL = `${window.location.origin}/api/availabilities`;
         const data = {
           from: name,
         };
@@ -86,7 +86,7 @@ export default function AvailabilitiesSetter({ date }) {
         updated[name] = id;
       } else {
         const id = availabilities[name];
-        const deleteAvailabilityURL = `${window.location.origin}/availabilities/${id}`;
+        const deleteAvailabilityURL = `${window.location.origin}/api/availabilities/${id}`;
 
         await axios.delete(deleteAvailabilityURL, { headers });
 
