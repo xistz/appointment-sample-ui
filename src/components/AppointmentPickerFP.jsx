@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
+import React, { useEffect, useState } from 'react';
 import AppointmentPickerFPCard from './AppointmentPickerFPCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +25,7 @@ export default function AvailabilitiesPickerFP({ time, selectAvailability }) {
     (async (time) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${window.location.origin}/api/availabilities/search`;
+      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities/search`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Paper, Step, StepLabel, Stepper, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
-import AppointmentPickerTime from './AppointmentPickerTime';
+import React, { useEffect, useState } from 'react';
 import AppointmentPickerFP from './AppointmentPickerFP';
 import AppointmentPickerSuccess from './AppointmentPickerSuccess';
+import AppointmentPickerTime from './AppointmentPickerTime';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,7 +42,7 @@ export default function AppointmentPicker({ date }) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const createAppointmentURL = `${window.location.origin}/api/appointments`;
+      const createAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments`;
       const data = {
         availability_id,
       };

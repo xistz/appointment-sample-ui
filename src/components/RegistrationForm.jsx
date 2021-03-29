@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   Avatar,
   Button,
-  CssBaseline,
-  Typography,
   Container,
-  Radio,
-  RadioGroup,
+  CssBaseline,
   FormControl,
   FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
 } from '@material-ui/core';
-import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { useAuth0 } from '@auth0/auth0-react';
+import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,7 @@ export default function Register() {
   const classes = useStyles();
   const { role, onChange } = useRole('financial planner');
   const history = useHistory();
-  const registerURL = `${window.location.origin}/api/register`;
+  const registerURL = `${process.env.REACT_APP_API_URL}/register`;
 
   const { getAccessTokenSilently } = useAuth0();
 

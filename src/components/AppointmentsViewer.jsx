@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-
-import AppointmentViewerCard from './AppointmentViewerCard';
+import React, { useEffect, useState } from 'react';
 import { getFrom, getTo } from '../helpers';
+import AppointmentViewerCard from './AppointmentViewerCard';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,7 +27,7 @@ export default function AppointmentsViewer({ date }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAppointmentsURL = `${window.location.origin}/api/appointments`;
+      const getAppointmentsURL = `${process.env.REACT_APP_API_URL}/appointments`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -83,7 +82,7 @@ export default function AppointmentsViewer({ date }) {
         Authorization: `Bearer ${token}`,
       };
 
-      const deleteAppointmentURL = `${window.location.origin}/api/appointments/${id}`;
+      const deleteAppointmentURL = `${process.env.REACT_APP_API_URL}/appointments/${id}`;
 
       await axios.delete(deleteAppointmentURL, { headers });
 

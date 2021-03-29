@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
-import AppointmentPickerTimeCard from './AppointmentPickerTimeCard';
+import React, { useEffect, useState } from 'react';
 import { getFrom, getTo } from '../helpers';
-import { Typography } from '@material-ui/core';
+import AppointmentPickerTimeCard from './AppointmentPickerTimeCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +27,7 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${window.location.origin}/api/availabilities/search`;
+      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities/search`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };

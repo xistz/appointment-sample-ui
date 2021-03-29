@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { formatISO } from 'date-fns';
 import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-
+import { formatISO } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import { getFrom, getTimes, getTo } from '../helpers';
 import AvailabiltySetterCard from './AvailabilitySetterCard';
-import { getFrom, getTo, getTimes } from '../helpers';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,7 +28,7 @@ export default function AvailabilitiesSetter({ date }) {
     (async (date) => {
       const token = await getAccessTokenSilently();
 
-      const getAvailabilitiesURL = `${window.location.origin}/api/availabilities`;
+      const getAvailabilitiesURL = `${process.env.REACT_APP_API_URL}/availabilities`;
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -72,7 +71,7 @@ export default function AvailabilitiesSetter({ date }) {
       };
 
       if (checked) {
-        const createAvailabilityURL = `${window.location.origin}/api/availabilities`;
+        const createAvailabilityURL = `${process.env.REACT_APP_API_URL}/availabilities`;
         const data = {
           from: name,
         };
@@ -86,7 +85,7 @@ export default function AvailabilitiesSetter({ date }) {
         updated[name] = id;
       } else {
         const id = availabilities[name];
-        const deleteAvailabilityURL = `${window.location.origin}/api/availabilities/${id}`;
+        const deleteAvailabilityURL = `${process.env.REACT_APP_API_URL}/availabilities/${id}`;
 
         await axios.delete(deleteAvailabilityURL, { headers });
 
