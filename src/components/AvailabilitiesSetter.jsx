@@ -44,10 +44,7 @@ export default function AvailabilitiesSetter({ date }) {
       const { data } = response.data;
 
       const got = data.reduce((result, current) => {
-        const {
-          id,
-          attributes: { from },
-        } = current;
+        const { id, from } = current;
 
         const datetime = formatISO(new Date(from));
 
