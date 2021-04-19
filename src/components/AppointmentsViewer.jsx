@@ -49,10 +49,7 @@ export default function AppointmentsViewer({ date }) {
       const initial = data.map((appointment) => {
         const parsed = {};
 
-        const {
-          id,
-          attributes: { from },
-        } = appointment;
+        const { id, from } = appointment;
         parsed['id'] = id;
         parsed['from'] = from;
 
@@ -60,9 +57,9 @@ export default function AppointmentsViewer({ date }) {
         let picture;
 
         if (isClient) {
-          ({ name, picture } = appointment.attributes.fp);
+          ({ name, picture } = appointment.fp);
         } else {
-          ({ name, picture } = appointment.attributes.client);
+          ({ name, picture } = appointment.client);
         }
 
         parsed['name'] = name;
