@@ -42,13 +42,7 @@ export default function AvailabilitiesPickerTime({ date, selectTime }) {
       });
       const { data } = response.data;
 
-      const initial = data.map((time) => {
-        const {
-          attributes: { from },
-        } = time;
-
-        return from;
-      });
+      const initial = data.map((time) => time.from);
 
       setTimes(initial);
     })(date);
