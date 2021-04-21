@@ -42,7 +42,7 @@ export default function AvailabilitiesPickerFP({ time, selectAvailability }) {
       const initial = data.map((availability) => {
         const {
           id,
-          attributes: { fp_name, fp_picture },
+          fp: { name: fp_name, picture: fp_picture },
         } = availability;
 
         return { id, fp_name, fp_picture };
